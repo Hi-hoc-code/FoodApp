@@ -27,8 +27,15 @@
         <activity
             android:name=".DangNhap"
             android:exported="false" />
+
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".log.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".log.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".log.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

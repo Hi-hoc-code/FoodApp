@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".log.LoginActivity"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="40dp"
+    android:gravity="top|center">
+    <ImageView
+        android:layout_width="210dp"
+        android:layout_height="220dp"
+        android:src="@drawable/logo"/>
+    <EditText
+        android:id="@+id/edtPhone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Nhập số điện thoại"
+        android:background="@drawable/border_log"
+        android:height="50dp"
+        android:paddingStart="20dp"
+        android:textSize="15sp"
+        android:layout_marginTop="25dp"/>
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Nhập số điện thoại"
+        android:background="@drawable/border_log"
+        android:height="50dp"
+        android:paddingStart="20dp"
+        android:textSize="15sp"
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="#FE7F5E"
+        android:text="Đăng nhập"
+        android:textColor="#333"
+        android:textStyle="bold"
+        app:cornerRadius="15dp"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"/>
+    <TextView
+        android:id="@+id/btnForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quên mật khẩu?"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/btnToRegister"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chưa có tài khoản? "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tạo tài khoản !"
+            android:textColor="#40C6FF"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Bạn có thể: "
+        android:layout_marginVertical="15dp"/>
+    <Button
+        android:id="@+id/btnFb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="#395998"
+        android:text="ĐĂNG NHẬP VỚI FACEBOOK"
+        android:textColor="#fff"
+        android:textStyle="normal"
+        app:cornerRadius="15dp"
+        android:textSize="16sp"
+        android:drawableLeft="@drawable/facebook"
+        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/btnGg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="#4285F4"
+        android:text="ĐĂNG NHẬP VỚI FACEBOOK"
+        android:textColor="#fff"
+        android:textStyle="normal"
+        app:cornerRadius="15dp"
+        android:textSize="16sp"
+        android:drawableLeft="@drawable/gg_icon"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>
