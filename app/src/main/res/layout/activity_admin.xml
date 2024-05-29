@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ManageActivity"
+    tools:context=".activity.AdminActivity"
     android:orientation="vertical">
 
     <FrameLayout
@@ -16,6 +16,6 @@
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:menu="@menu/bottom_nav_user"
+        app:menu="@menu/bottom_nav_admin"
         android:layout_gravity="bottom"/>
 </LinearLayout>

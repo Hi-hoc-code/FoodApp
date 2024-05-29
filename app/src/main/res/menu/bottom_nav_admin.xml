@@ -11,10 +11,6 @@
         android:icon="@drawable/member_manager"
         android:title=""
         app:showAsAction="ifRoom"/>
-<!--    <item-->
-<!--        android:id="@+id/type_product"-->
-<!--        android:icon="@drawable/type_product"-->
-<!--        android:title="Types" />-->
     <item
         android:id="@+id/bill"
         android:icon="@drawable/bill"

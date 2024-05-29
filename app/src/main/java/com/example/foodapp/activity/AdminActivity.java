@@ -14,26 +14,22 @@ import com.example.foodapp.fragment.AdminMemberFragment;
 import com.example.foodapp.fragment.AdminNoticeFragment;
 import com.example.foodapp.fragment.AdminProductFragment;
 //import com.example.foodapp.fragment.AdminTypeFragment;
-import com.example.foodapp.fragment.UserCartFragment;
-import com.example.foodapp.fragment.UserFoodFragment;
-import com.example.foodapp.fragment.UserHomeFragment;
-import com.example.foodapp.fragment.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ManageActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage);
+        setContentView(R.layout.activity_admin);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
         // Set default fragment
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new UserHomeFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new AdminProductFragment()).commit();
         }
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -41,16 +37,20 @@ public class ManageActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
 
+
                 int itemId = item.getItemId();
-                if (itemId == R.id.home) {
-                    selectedFragment = new UserHomeFragment();
-                } else if (itemId == R.id.food) {
-                    selectedFragment = new UserFoodFragment();
-                } else if (itemId == R.id.cart) {
-                    selectedFragment = new UserCartFragment();
-                }else if(itemId == R.id.profile){
-                    selectedFragment = new UserProfileFragment();
+                if (itemId == R.id.product_manager) {
+                    selectedFragment = new AdminProductFragment();
+                } else if (itemId == R.id.member_manager) {
+                    selectedFragment = new AdminMemberFragment();
+                } else if (itemId == R.id.bill) {
+                    selectedFragment = new AdminBillFragment();
+                }else if(itemId==R.id.chart){
+                    selectedFragment= new AdminNoticeFragment();
+                }else if(itemId ==R.id.notification){
+                    selectedFragment = new AdminNoticeFragment();
                 }
+
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, selectedFragment).commit();
                 }
