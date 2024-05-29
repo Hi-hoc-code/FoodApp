@@ -18,6 +18,21 @@
 
         <activity
             android:name=".activity.AdminActivity"
+            android:name=".QuenMatKhau"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ManageActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".log.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".log.LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
