@@ -43,9 +43,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".log.WelcomeActivity"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>
