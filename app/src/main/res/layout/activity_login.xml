@@ -27,9 +27,10 @@
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Nhập số điện thoại"
+        android:hint="Nhập số mật khẩu"
         android:background="@drawable/border_log"
         android:height="50dp"
+        android:inputType="textPassword"
         android:paddingStart="20dp"
         android:textSize="15sp"
         android:layout_marginTop="12dp"/>
