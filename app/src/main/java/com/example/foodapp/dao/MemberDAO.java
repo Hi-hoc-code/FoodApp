@@ -22,7 +22,7 @@ public class MemberDAO {
     public ArrayList<Member> getAll() {
         ArrayList<Member> list = new ArrayList<>();
         SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "SELECT id,name, phone, avatar, passwordUser FROM USER";
+        String sql = "SELECT id, name, phone, avatar, passwordUser FROM USER";
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -35,6 +35,7 @@ public class MemberDAO {
             list.add(member);
             cursor.moveToNext();
         }
+        cursor.close();
         db.close();
         return list;
     }
@@ -61,6 +62,7 @@ public class MemberDAO {
         values.put("phone", member.getPhone());
         values.put("passUser", member.getPasswordUser());
         long edit = db.update("USER", values, "id = ?", new String[]{String.valueOf(member.getId())});
+        db.close();
         return edit > 0;
     }
 
@@ -74,19 +76,21 @@ public class MemberDAO {
 
     public String checkLogin(String username, String password) {
         SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "SELECT roleUser FROM User WHERE name = ? AND passwordUser = ?";
-        Cursor cursor = db.rawQuery(sql, new String[]{username, password});
+        String[] columns = {"id", "roleUser"};
+        String selection = "name = ? AND passwordUser = ?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query("User", columns, selection, selectionArgs, null, null, null);
 
         if (cursor.moveToFirst()) {
-            int roleUser = cursor.getInt(0);
+            int id = cursor.getInt(0);
+            int roleUser = cursor.getInt(1);
             cursor.close();
             db.close();
-            return roleUser == 0 ? "admin" : "user";
+            return (roleUser == 0 ? "admin" : "user") + "|" + id;
         } else {
             cursor.close();
             db.close();
             return "invalid";
         }
     }
-
 }

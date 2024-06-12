@@ -92,4 +92,36 @@ public class ProductDAO {
         database.close();
         return result > 0;
     }
+
+    public Products getProductById(String nameFood) {
+        SQLiteDatabase database = helper.getReadableDatabase();
+        Cursor cursor = null;
+        Products product = null;
+
+        try {
+            String query = "SELECT Product.name, Product.image, Product.price, Product.description, " +
+                    "Product.categoryId, Category.name as categoryName " +
+                    "FROM Product " +
+                    "JOIN Category ON Product.categoryId = Category.id " +
+                    "WHERE Product.name = ?";
+            cursor = database.rawQuery(query, new String[]{nameFood});
+            if (cursor.moveToFirst()) {
+                String name = cursor.getString(0);
+                String image = cursor.getString(1);
+                int price = cursor.getInt(2);
+                String description = cursor.getString(3);
+                int categoryId = cursor.getInt(4);
+                String categoryName = cursor.getString(5);
+                product = new Products(name, price, description, categoryId, categoryName, image);
+            }
+        } catch (Exception ex) {
+            Log.e(TAG, "Error while trying to get product by ID from database", ex);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            database.close();
+        }
+        return product;
+    }
 }

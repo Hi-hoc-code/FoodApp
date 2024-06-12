@@ -4,6 +4,9 @@ public class Member {
     private Integer Id,roleUser;
     private String name, phone, avatar, orderID, passwordUser ;
 
+    public Member() {
+    }
+
     public Member(Integer id, String name, String phone, String avatar, String orderID, String passwordUser, Integer roleUser) {
         Id = id;
         this.name = name;

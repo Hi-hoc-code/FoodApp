@@ -1,9 +1,6 @@
 package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,9 +12,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.foodapp.R;
-import com.example.foodapp.fragment.AllFragment;
+import com.example.foodapp.dao.CartDAO;
+import com.example.foodapp.dao.ProductDAO;
+import com.example.foodapp.model.Cart;
+import com.example.foodapp.model.Products;
 
 public class DetailFoodActivity extends AppCompatActivity {
 
@@ -26,6 +25,10 @@ public class DetailFoodActivity extends AppCompatActivity {
     private EditText etQuantity;
     private Button btnAddToCart;
     private ImageButton btnDecrease, btnIncrease, btnBack;
+    private ProductDAO productDAO;
+    private Products product;
+    private CartDAO cartDAO;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +44,39 @@ public class DetailFoodActivity extends AppCompatActivity {
         btnIncrease = findViewById(R.id.btnIncrease);
         btnAddToCart = findViewById(R.id.btnAddToCart);
         btnBack = findViewById(R.id.btnBack);
+        productDAO = new ProductDAO(getApplicationContext());
+        cartDAO = new CartDAO(getApplicationContext());
 
         // Get data from intent
-        String foodName = getIntent().getStringExtra("foodName");
-        String foodPrice = getIntent().getStringExtra("foodPrice");
-        String foodImage = getIntent().getStringExtra("foodImage");
+        String nameFood = getIntent().getStringExtra("foodName");
+        Intent intent = getIntent();
+        if (intent != null) {
+            userId = intent.getStringExtra("idUser");
+            if (userId != null) {
+                Toast.makeText(this, "User ID: " + userId, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "User ID is null", Toast.LENGTH_SHORT).show();
+            }
+        }
 
-        // Set data to views
-        tvFoodName.setText(foodName);
-        tvFoodPrice.setText(foodPrice+"$");
-        int resImg = getResources().getIdentifier(foodImage, "drawable", getPackageName());
-        imgFood.setImageResource(resImg);
+        if (nameFood != null) {
+            // Fetch product details using the product ID
+            product = productDAO.getProductById(nameFood);
+
+            // Check if product is not null and set data to views
+            if (product != null) {
+                tvFoodName.setText(product.getName());
+                tvFoodPrice.setText(product.getPrice() + "$");
+                int resImg = getResources().getIdentifier(product.getImage(), "drawable", getPackageName());
+                imgFood.setImageResource(resImg);
+            } else {
+                Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();
+                finish(); // Close the activity if product not found
+            }
+        } else {
+            Toast.makeText(this, "Invalid product ID", Toast.LENGTH_SHORT).show();
+            finish(); // Close the activity if no valid ID is passed
+        }
 
         // Configure quantity buttons
         btnDecrease.setOnClickListener(v -> {
@@ -74,25 +99,25 @@ public class DetailFoodActivity extends AppCompatActivity {
         btnAddToCart.setOnClickListener(v -> {
             int quantity = getQuantity();
             if (quantity > 0 && quantity <= 50) {
-                // Add logic to handle adding to cart
+                Cart cart = new Cart(userId, nameFood, product.getImage(), product.getDes(), product.getPrice());
+                cartDAO.addToCart(cart);
                 Toast.makeText(DetailFoodActivity.this, "Added " + quantity + " items to cart.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(DetailFoodActivity.this, "Please enter a valid quantity (1-50).", Toast.LENGTH_SHORT).show();
             }
         });
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             finish();
-            }
-        });
+
+        btnBack.setOnClickListener(v -> finish());
+
         // Add text change listener to ensure valid input
         etQuantity.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -113,8 +138,8 @@ public class DetailFoodActivity extends AppCompatActivity {
         int quantity = getQuantity();
         if (quantity < 1) {
             etQuantity.setText("1");
-        } else if (quantity > 100) {
-            etQuantity.setText("100");
+        } else if (quantity > 50) {
+            etQuantity.setText("50");
         }
     }
 }

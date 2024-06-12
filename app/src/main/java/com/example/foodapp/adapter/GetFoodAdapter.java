@@ -1,7 +1,10 @@
 package com.example.foodapp.adapter;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
 import com.example.foodapp.activity.DetailFoodActivity;
+import com.example.foodapp.model.Member;
 import com.example.foodapp.model.Products;
 
 import java.util.ArrayList;
@@ -42,12 +46,13 @@ public class GetFoodAdapter extends RecyclerView.Adapter<GetFoodAdapter.FoodView
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         Products product = foodList.get(holder.getAdapterPosition());
+        Member member =new Member();
         holder.bindData(product);
         View.OnClickListener detailClickListener = v -> {
             Intent intent = new Intent(context, DetailFoodActivity.class);
             intent.putExtra("foodName", product.getName());
-            intent.putExtra("foodPrice", String.valueOf(product.getPrice()));
-            intent.putExtra("foodImage", product.getImage());
+            intent.putExtra("idUser", member.getId());
+
             context.startActivity(intent);
         };
 

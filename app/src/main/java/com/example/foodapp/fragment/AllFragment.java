@@ -1,5 +1,6 @@
 package com.example.foodapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
+import com.example.foodapp.activity.DetailFoodActivity;
 import com.example.foodapp.adapter.GetFoodAdapter;
 import com.example.foodapp.dao.ProductDAO;
 import com.example.foodapp.model.Products;
@@ -37,7 +39,6 @@ public class AllFragment extends Fragment {
         rcvAllFood = view.findViewById(R.id.rcvAllFood);
 
         rcvDemoFood.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
         rcvAllFood.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         ProductDAO productDAO = new ProductDAO(getContext());
@@ -52,20 +53,21 @@ public class AllFragment extends Fragment {
         handler = new Handler(Looper.getMainLooper());
         startAutoScroll();
 
+        // Receive user ID from UserHomeFragment
+        Bundle bundle = getArguments();
+        String userId = bundle.getString("idUser");
+
         return view;
     }
 
     private void startAutoScroll() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                currentIndex++;
-                if (currentIndex >= foodList.size()) {
-                        currentIndex=0;
-                }
-                rcvDemoFood.smoothScrollToPosition(currentIndex);
-                handler.postDelayed(this, 4000);
+        handler.postDelayed(() -> {
+            currentIndex++;
+            if (currentIndex >= foodList.size()) {
+                currentIndex = 0;
             }
+            rcvDemoFood.smoothScrollToPosition(currentIndex);
+            handler.postDelayed(this::startAutoScroll, 4000);
         }, 4000);
     }
 
