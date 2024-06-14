@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "APP_FOOD";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 5;
 
     private static final String TABLE_USER = "User";
     private static final String TABLE_CATEGORY = "Category";
@@ -53,11 +53,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "content TEXT)";
     private static final String CREATE_TABLE_CART = "CREATE TABLE " + TABLE_CART + " (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "idUser TEXT," + // Thêm cột idUser
-            "nameFood TEXT," + // Thêm cột nameFood
-            "img TEXT," + // Thêm cột img
-            "des TEXT," + // Thêm cột des
-            "price INTEGER)"; // Thêm cột price
+            "nameFood TEXT," +
+            "img TEXT," +
+            "des TEXT," +
+            "price INTEGER)";
 
     public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -90,6 +89,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content, notificationId) VALUES('Giảm giá','Chương trình khuyến mãi mua 2 tặng 1',1)");
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content) VALUES('Quà tặng cuộc sống ','Quà tặng cuộc sống được ban cho bạn')");
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content) VALUES('Thông báo','Bạn đã bị thua 5 tỉ!')");
+
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price) VALUES('Pizza', 'anh1', 'Delicious pizza with cheese', 10)");
+
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price) VALUES('Burger', 'anh2', 'Tasty burger with beef patty', 8)");
+
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price) VALUES('Pasta', 'anh3', 'Italian pasta with tomato sauce', 12)");
 
         db.execSQL("INSERT INTO " + TABLE_USER + "(name, passwordUser, roleUser) " +
                 "VALUES('Admin','Admin123@',0)");

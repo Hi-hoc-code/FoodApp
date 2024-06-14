@@ -28,15 +28,11 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-        String uID = getIntent().getStringExtra("idUser");
-        Log.d(TAG, "ID USER: "+uID);
-        Bundle bundle = new Bundle();
-        bundle.putString("idUser",uID);
+
 
         // Set default fragment
         if (savedInstanceState == null) {
             UserHomeFragment homeFragment = new UserHomeFragment();
-            homeFragment.setArguments(bundle); // Đặt Bundle vào fragment
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, homeFragment).commit();
         }
 
@@ -48,7 +44,7 @@ public class UserActivity extends AppCompatActivity {
 
                 if (itemId == R.id.home) {
                     selectedFragment = new UserHomeFragment();
-                    selectedFragment.setArguments(bundle); // Đặt Bundle vào fragment
+
                 } else if (itemId == R.id.food) {
                     selectedFragment = new UserFoodFragment();
                 } else if (itemId == R.id.cart) {

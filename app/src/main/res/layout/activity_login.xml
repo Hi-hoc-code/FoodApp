@@ -23,7 +23,22 @@
         android:paddingStart="20dp"
         android:textSize="15sp"
         android:layout_marginTop="25dp"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+        <TextView
+            android:id="@+id/id_user_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user account"/>
+        <TextView
+            android:id="@+id/id_admin_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="admin account"/>
+    </LinearLayout>
     <EditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
@@ -35,7 +50,6 @@
         android:inputType="textPassword"
         android:paddingStart="20dp"
         android:textSize="15sp" />
-
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"

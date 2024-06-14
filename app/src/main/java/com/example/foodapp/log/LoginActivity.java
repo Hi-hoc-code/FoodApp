@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodapp.R;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText edtName, edtPassword;
     private MemberDAO memberDAO;
+    private TextView tv_user_account, tv_admin_account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,20 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
-
+        tv_user_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtName.setText("HO NGOC Y");
+                edtPassword.setText("Admin123@");
+            }
+        });
+        tv_admin_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtName.setText("Admin");
+                edtPassword.setText("Admin123@");
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,15 +91,11 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else if (role.equals("user")) {
-                    if (!userId.equals("invalid")) {
-                        Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-                        intent.putExtra("idUser", userId);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-                    }
+                    Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
+
             }
         });
     }
@@ -93,7 +104,10 @@ public class LoginActivity extends AppCompatActivity {
         btnToRegister = findViewById(R.id.btnToRegister);
         btnLogin = findViewById(R.id.btnLogin);
         edtName= findViewById(R.id.edtName);
+        tv_user_account = findViewById(R.id.id_user_account);
+        tv_admin_account = findViewById(R.id.id_admin_account);
         edtPassword = findViewById(R.id.edtPassword);
         memberDAO = new MemberDAO(LoginActivity.this);
+
     }
 }

@@ -53,9 +53,27 @@ public class AllFragment extends Fragment {
         handler = new Handler(Looper.getMainLooper());
         startAutoScroll();
 
-        // Receive user ID from UserHomeFragment
-        Bundle bundle = getArguments();
-        String userId = bundle.getString("idUser");
+        // Set item click listener for adapterDemo
+        adapterDemo.setOnItemClickListener(position -> {
+            // Get the selected product
+            Products selectedProduct = foodList.get(position);
+
+            // Create an intent to open DetailFoodActivity and pass data
+            Intent intent = new Intent(getContext(), DetailFoodActivity.class);
+            intent.putExtra("foodName", selectedProduct.getName());
+            startActivity(intent);
+        });
+
+        // Set item click listener for adapterAll
+        adapterAll.setOnItemClickListener(position -> {
+            // Get the selected product
+            Products selectedProduct = foodList.get(position);
+
+            // Create an intent to open DetailFoodActivity and pass data
+            Intent intent = new Intent(getContext(), DetailFoodActivity.class);
+            intent.putExtra("foodName", selectedProduct.getName());
+            startActivity(intent);
+        });
 
         return view;
     }

@@ -1,26 +1,34 @@
 package com.example.foodapp.model;
 
 public class Cart {
-    private String idUser;
+    private Integer idCart;
     private String nameFood;
     private String img;
     private String des;
     private Integer price;
 
-    public Cart(String idUser, String nameFood, String img, String des, Integer price) {
-        this.idUser = idUser;
+
+    public Cart(Integer idCart, String nameFood, String img, String des, Integer price) {
+        this.idCart = idCart;
         this.nameFood = nameFood;
         this.img = img;
         this.des = des;
         this.price = price;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public Cart(String nameFood, String img, String des, Integer price) {
+        this.nameFood = nameFood;
+        this.img = img;
+        this.des = des;
+        this.price = price;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public Integer getIdCart() {
+        return idCart;
+    }
+
+    public void setIdUser(Integer idCart) {
+        this.idCart = idCart;
     }
 
     public String getNameFood() {

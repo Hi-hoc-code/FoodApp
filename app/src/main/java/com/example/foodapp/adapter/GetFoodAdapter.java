@@ -1,10 +1,7 @@
 package com.example.foodapp.adapter;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
 import com.example.foodapp.activity.DetailFoodActivity;
-import com.example.foodapp.model.Member;
 import com.example.foodapp.model.Products;
 
 import java.util.ArrayList;
@@ -29,11 +25,19 @@ public class GetFoodAdapter extends RecyclerView.Adapter<GetFoodAdapter.FoodView
     private ArrayList<Products> foodList;
     private Context context;
     private int layoutResourceId;
+    private OnItemClickListener mListener;
 
     public GetFoodAdapter(ArrayList<Products> foodList, Context context, int layoutResourceId) {
         this.foodList = foodList;
         this.context = context;
         this.layoutResourceId = layoutResourceId;
+    }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
     @NonNull
@@ -42,18 +46,15 @@ public class GetFoodAdapter extends RecyclerView.Adapter<GetFoodAdapter.FoodView
         View view = LayoutInflater.from(context).inflate(layoutResourceId, parent, false);
         return new FoodViewHolder(view, layoutResourceId);
     }
-
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         Products product = foodList.get(holder.getAdapterPosition());
-        Member member =new Member();
         holder.bindData(product);
-        View.OnClickListener detailClickListener = v -> {
-            Intent intent = new Intent(context, DetailFoodActivity.class);
-            intent.putExtra("foodName", product.getName());
-            intent.putExtra("idUser", member.getId());
 
-            context.startActivity(intent);
+        View.OnClickListener detailClickListener = v -> {
+            if (mListener != null) {
+                mListener.onItemClick(holder.getAdapterPosition());
+            }
         };
 
         if (layoutResourceId == R.layout.layout_item_food) {

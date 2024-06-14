@@ -18,6 +18,8 @@ import com.example.foodapp.dao.ProductDAO;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Products;
 
+import java.util.ArrayList;
+
 public class DetailFoodActivity extends AppCompatActivity {
 
     private TextView tvFoodName, tvFoodPrice;
@@ -28,6 +30,7 @@ public class DetailFoodActivity extends AppCompatActivity {
     private ProductDAO productDAO;
     private Products product;
     private CartDAO cartDAO;
+    private ArrayList<Cart> list;
     private String userId;
 
     @Override
@@ -49,16 +52,6 @@ public class DetailFoodActivity extends AppCompatActivity {
 
         // Get data from intent
         String nameFood = getIntent().getStringExtra("foodName");
-        Intent intent = getIntent();
-        if (intent != null) {
-            userId = intent.getStringExtra("idUser");
-            if (userId != null) {
-                Toast.makeText(this, "User ID: " + userId, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "User ID is null", Toast.LENGTH_SHORT).show();
-            }
-        }
-
         if (nameFood != null) {
             // Fetch product details using the product ID
             product = productDAO.getProductById(nameFood);
@@ -98,12 +91,14 @@ public class DetailFoodActivity extends AppCompatActivity {
         // Handle Add to Cart button click
         btnAddToCart.setOnClickListener(v -> {
             int quantity = getQuantity();
+            String img = product.getImage();
+            String des = product.getDes();
+            Integer price = product.getPrice();
             if (quantity > 0 && quantity <= 50) {
-                Cart cart = new Cart(userId, nameFood, product.getImage(), product.getDes(), product.getPrice());
-                cartDAO.addToCart(cart);
-                Toast.makeText(DetailFoodActivity.this, "Added " + quantity + " items to cart.", Toast.LENGTH_SHORT).show();
+                Cart cart = new Cart( nameFood,img,des, price);
+                cartDAO.insert(cart);
             } else {
-                Toast.makeText(DetailFoodActivity.this, "Please enter a valid quantity (1-50).", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailFoodActivity.this, "Add fail", Toast.LENGTH_SHORT).show();
             }
         });
 
