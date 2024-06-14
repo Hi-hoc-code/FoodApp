@@ -31,7 +31,7 @@ public class UserCartFragment extends Fragment implements CartAdapter.OnItemSele
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_cart, container, false);
         rcvCart = view.findViewById(R.id.rcvListCart);
-        btnCheckout = view.findViewById(R.id.btnCheckout); // Ensure you have this ID in your XML
+        btnCheckout = view.findViewById(R.id.btnCheckout);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rcvCart.setLayoutManager(layoutManager);

@@ -31,13 +31,6 @@ public class UserHomeFragment extends Fragment {
         ViewPager2HomeUserAdapter adapter = new ViewPager2HomeUserAdapter(getActivity());
         viewPager.setAdapter(adapter);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            String userId = bundle.getString("idUser");
-            Toast.makeText(getContext(), "User ID: " + userId, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Null", Toast.LENGTH_SHORT).show();
-        }
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {

@@ -1,15 +1,15 @@
 package com.example.foodapp.model;
 
-public class Cart {
-    private Integer idCart;
+public class Order {
+    private Integer order;
     private String nameFood;
     private String img;
     private String des;
     private Integer price;
     private Integer quanity;
 
-    public Cart(Integer idCart, String nameFood, String img, String des, Integer price, Integer quanity) {
-        this.idCart = idCart;
+    public Order(Integer order, String nameFood, String img, String des, Integer price, Integer quanity) {
+        this.order = order;
         this.nameFood = nameFood;
         this.img = img;
         this.des = des;
@@ -17,8 +17,8 @@ public class Cart {
         this.quanity = quanity;
     }
 
-    public Cart(String nameFood, String img, String des, Integer price, Integer quanity) {
-        this.idCart = idCart;
+    public Order(String nameFood, String img, String des, Integer price, Integer quanity) {
+        this.order = order;
         this.nameFood = nameFood;
         this.img = img;
         this.des = des;
@@ -26,12 +26,12 @@ public class Cart {
         this.quanity = quanity;
     }
 
-    public Integer getIdCart() {
-        return idCart;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setIdCart(Integer idCart) {
-        this.idCart = idCart;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     public String getNameFood() {

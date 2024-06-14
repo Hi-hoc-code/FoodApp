@@ -64,14 +64,14 @@ public class DetailFoodActivity extends AppCompatActivity {
                 imgFood.setImageResource(resImg);
             } else {
                 Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();
-                finish(); // Close the activity if product not found
+                finish();
             }
         } else {
             Toast.makeText(this, "Invalid product ID", Toast.LENGTH_SHORT).show();
-            finish(); // Close the activity if no valid ID is passed
+            finish();
         }
 
-        // Configure quantity buttons
+
         btnDecrease.setOnClickListener(v -> {
             int quantity = getQuantity();
             if (quantity > 1) {
@@ -88,17 +88,22 @@ public class DetailFoodActivity extends AppCompatActivity {
             }
         });
 
-        // Handle Add to Cart button click
+
         btnAddToCart.setOnClickListener(v -> {
             int quantity = getQuantity();
             String img = product.getImage();
             String des = product.getDes();
             Integer price = product.getPrice();
-            if (quantity > 0 && quantity <= 50) {
-                Cart cart = new Cart( nameFood,img,des, price);
-                cartDAO.insert(cart);
+            if (cartDAO.isItemInCart(nameFood)) {
+                Toast.makeText(DetailFoodActivity.this, "Item already in cart", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(DetailFoodActivity.this, "Add fail", Toast.LENGTH_SHORT).show();
+                if (quantity > 0 && quantity <= 50 ) {
+                    Cart cart = new Cart(nameFood, img, des, price, quantity);
+                    cartDAO.insert(cart);
+                    Toast.makeText(DetailFoodActivity.this, "Item added to cart", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DetailFoodActivity.this, "Add failed", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

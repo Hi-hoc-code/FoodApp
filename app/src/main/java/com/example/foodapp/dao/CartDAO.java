@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.example.foodapp.database.DbHelper;
 import com.example.foodapp.model.Cart;
 import com.example.foodapp.model.Member;
@@ -31,7 +32,8 @@ public class CartDAO {
             String img = cursor.getString(2);
             String des = cursor.getString(3);
             Integer price = cursor.getInt(4);
-            Cart cart = new Cart(id, nameFood, img, des, price);
+            Integer quanity = cursor.getInt(5);
+            Cart cart = new Cart(id, nameFood, img, des, price, quanity);
             list.add(cart);
             cursor.moveToNext();
         }
@@ -48,10 +50,12 @@ public class CartDAO {
         values.put("img", cart.getImg());
         values.put("des", cart.getDes());
         values.put("price", cart.getPrice());
+        values.put("quanity", cart.getQuanity());
         long add = db.insert("Cart", null, values);
         db.close();
         return add != -1;
     }
+
     public boolean removeCart(Integer id) {
         db = dbHelper.getWritableDatabase();
         long check = db.delete("Cart", "id=?", new String[]{String.valueOf(id)});
@@ -59,5 +63,28 @@ public class CartDAO {
         return check > 0;
     }
 
+    public boolean isItemInCart(String itemName) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {"id"};
+        String selection = "nameFood = ?";
+        String[] selectionArgs = {itemName};
+        Cursor cursor = db.query("Cart", columns, selection, selectionArgs, null, null, null);
+        boolean itemExists = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return itemExists;
+    }
+    public boolean update(Cart cart) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nameFood", cart.getNameFood());
+        values.put("img", cart.getImg());
+        values.put("des", cart.getDes());
+        values.put("price", cart.getPrice());
+        values.put("quanity", cart.getQuanity());
+        int rowsAffected = db.update("Cart", values, "id=?", new String[]{String.valueOf(cart.getIdCart())});
+        db.close();
+        return rowsAffected > 0;
+    }
 
 }

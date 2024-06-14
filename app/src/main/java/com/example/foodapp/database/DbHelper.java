@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "APP_FOOD";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     private static final String TABLE_USER = "User";
     private static final String TABLE_CATEGORY = "Category";
@@ -56,7 +56,8 @@ public class DbHelper extends SQLiteOpenHelper {
             "nameFood TEXT," +
             "img TEXT," +
             "des TEXT," +
-            "price INTEGER)";
+            "price INTEGER," +
+            "quanity INTEGER)";
 
     public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -90,11 +91,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content) VALUES('Quà tặng cuộc sống ','Quà tặng cuộc sống được ban cho bạn')");
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content) VALUES('Thông báo','Bạn đã bị thua 5 tỉ!')");
 
-        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price) VALUES('Pizza', 'anh1', 'Delicious pizza with cheese', 10)");
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Pizza', 'anh1', 'Delicious pizza with cheese', 10,2)");
 
-        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price) VALUES('Burger', 'anh2', 'Tasty burger with beef patty', 8)");
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Burger', 'anh2', 'Tasty burger with beef patty', 8,1)");
 
-        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price) VALUES('Pasta', 'anh3', 'Italian pasta with tomato sauce', 12)");
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Pasta', 'anh3', 'Italian pasta with tomato sauce', 12,3)");
 
         db.execSQL("INSERT INTO " + TABLE_USER + "(name, passwordUser, roleUser) " +
                 "VALUES('Admin','Admin123@',0)");

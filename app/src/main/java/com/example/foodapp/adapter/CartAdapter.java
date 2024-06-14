@@ -1,10 +1,15 @@
 package com.example.foodapp.adapter;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
         holder.tvNameFoodCart.setText(cart.getNameFood());
         holder.tvPriceFoodCart.setText(cart.getPrice() + "$");
-
+        holder.edtQuantity.setText(String.valueOf(cart.getQuanity()));
         holder.checkboxCartItem.setOnCheckedChangeListener(null);
         holder.checkboxCartItem.setChecked(selectedItems.contains(index));
 
@@ -61,28 +66,72 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             onItemSelectedListener.onItemSelected(getTotalPrice());
         });
 
-        // Handle edit button click (if needed)
-        holder.btnEditCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Implement edit functionality here
+        holder.btnIncreaseQuantity.setOnClickListener(v -> {
+            int quantity = cart.getQuanity();
+            if (quantity < 50) {
+                quantity++;
+                cart.setQuanity(quantity);
+                holder.edtQuantity.setText(String.valueOf(quantity));
+                cartDAO.update(cart);
+                notifyItemChanged(position);
+                onItemSelectedListener.onItemSelected(getTotalPrice());
             }
         });
 
-        // Handle remove button click (if needed)
-        holder.btnRemoveCart.setOnClickListener(new View.OnClickListener() {
+        holder.btnDecreaseQuantity.setOnClickListener(v -> {
+            int quantity = cart.getQuanity();
+            if (quantity > 1) {
+                quantity--;
+                cart.setQuanity(quantity);
+                holder.edtQuantity.setText(String.valueOf(quantity));
+                cartDAO.update(cart);
+                notifyItemChanged(position);
+                onItemSelectedListener.onItemSelected(getTotalPrice());
+            }
+        });
+
+        holder.edtQuantity.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                if (cartDAO.removeCart(cart.getIdCart())) {  // Use cart ID here
-                    Toast.makeText(context, "Item removed", Toast.LENGTH_SHORT).show();
-                    cartList.remove(index);
-                    notifyItemRemoved(index);
-                    notifyItemRangeChanged(index, cartList.size());
-                    selectedItems.remove(index);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    int quantity = Integer.parseInt(s.toString());
+                    if (quantity < 1) {
+                        quantity = 1;
+                    } else if (quantity > 50) {
+                        quantity = 50;
+                    }
+                    cart.setQuanity(quantity);
+                    cartDAO.update(cart);
                     onItemSelectedListener.onItemSelected(getTotalPrice());
-                } else {
-                    Toast.makeText(context, "Failed to remove item", Toast.LENGTH_SHORT).show();
+                } catch (NumberFormatException e) {
+                    holder.edtQuantity.setText(String.valueOf(cart.getQuanity()));
                 }
+            }
+        });
+
+        holder.btnEditCart.setOnClickListener(v -> {
+            // Implement edit functionality here
+        });
+
+        holder.btnRemoveCart.setOnClickListener(v -> {
+            Cart cartDelete = cartList.get(holder.getAdapterPosition());
+            try {
+                cartDAO.removeCart(cartDelete.getIdCart());
+                cartList.clear();
+                cartList.addAll(cartDAO.getAll());
+                notifyDataSetChanged();
+                Toast.makeText(context, "Item removed", Toast.LENGTH_SHORT).show();
+                onItemSelectedListener.onItemSelected(getTotalPrice());
+            } catch (Exception ex) {
+                Log.d("CartAdapter", "DELETE CART: " + ex);
             }
         });
     }
@@ -96,7 +145,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         double totalPrice = 0;
         for (int position : selectedItems) {
             Cart cart = cartList.get(position);
-            totalPrice += cart.getPrice();
+            totalPrice += cart.getPrice() * cart.getQuanity();
         }
         return totalPrice;
     }
@@ -107,9 +156,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imgFoodCart;
-        TextView tvNameFoodCart, tvPriceFoodCart;
-        TextView btnEditCart, btnRemoveCart;
+        TextView tvNameFoodCart, tvPriceFoodCart, btnEditCart, btnRemoveCart;
         CheckBox checkboxCartItem;
+        EditText edtQuantity;
+        ImageButton btnIncreaseQuantity, btnDecreaseQuantity;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -119,6 +169,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             btnEditCart = itemView.findViewById(R.id.btnEditCart);
             btnRemoveCart = itemView.findViewById(R.id.btnRemoveCart);
             checkboxCartItem = itemView.findViewById(R.id.checkboxCartItem);
+            edtQuantity = itemView.findViewById(R.id.edtQuantity);
+            btnIncreaseQuantity = itemView.findViewById(R.id.btnIncreaseQuantity);
+            btnDecreaseQuantity = itemView.findViewById(R.id.btnDecreaseQuantity);
         }
     }
 }
