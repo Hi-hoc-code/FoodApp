@@ -1,76 +1,57 @@
 package com.example.foodapp.model;
 
 public class Order {
-    private Integer order;
-    private String nameFood;
-    private String img;
-    private String des;
-    private Integer price;
-    private Integer quanity;
+    private String orderID;
+    private double total;
+    private int userID;
+    private String status;
+    private String shippingAddress;
 
-    public Order(Integer order, String nameFood, String img, String des, Integer price, Integer quanity) {
-        this.order = order;
-        this.nameFood = nameFood;
-        this.img = img;
-        this.des = des;
-        this.price = price;
-        this.quanity = quanity;
+    public Order(String orderID, double total, int userID, String status, String shippingAddress) {
+        this.orderID = orderID;
+        this.total = total;
+        this.userID = userID;
+        this.status = status;
+        this.shippingAddress = shippingAddress;
     }
 
-    public Order(String nameFood, String img, String des, Integer price, Integer quanity) {
-        this.order = order;
-        this.nameFood = nameFood;
-        this.img = img;
-        this.des = des;
-        this.price = price;
-        this.quanity = quanity;
+    public String getOrderID() {
+        return orderID;
     }
 
-    public Integer getOrder() {
-        return order;
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public double getTotal() {
+        return total;
     }
 
-    public String getNameFood() {
-        return nameFood;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
-    public void setNameFood(String nameFood) {
-        this.nameFood = nameFood;
+    public int getUserID() {
+        return userID;
     }
 
-    public String getImg() {
-        return img;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public String getStatus() {
+        return status;
     }
 
-    public String getDes() {
-        return des;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setDes(String des) {
-        this.des = des;
+    public String getShippingAddress() {
+        return shippingAddress;
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getQuanity() {
-        return quanity;
-    }
-
-    public void setQuanity(Integer quanity) {
-        this.quanity = quanity;
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 }
