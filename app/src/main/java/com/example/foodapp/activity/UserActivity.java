@@ -45,10 +45,10 @@ public class UserActivity extends AppCompatActivity {
                 if (itemId == R.id.home) {
                     selectedFragment = new UserHomeFragment();
 
-                } else if (itemId == R.id.food) {
-                    selectedFragment = new UserFoodFragment();
                 } else if (itemId == R.id.cart) {
                     selectedFragment = new UserCartFragment();
+                } else if (itemId == R.id.food) {
+                    selectedFragment = new UserFoodFragment();
                 } else if (itemId == R.id.profile) {
                     selectedFragment = new UserProfileFragment();
                 }

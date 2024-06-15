@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.foodapp.database.DbHelper;
 import com.example.foodapp.model.Order;
+import com.example.foodapp.model.OrderItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
     private SQLiteDatabase db;
@@ -16,50 +18,58 @@ public class OrderDAO {
 
     public OrderDAO(Context context) {
         dbHelper = new DbHelper(context);
+        db = dbHelper.getWritableDatabase();
     }
 
     public boolean insert(Order order) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("orderID", order.getOrderID());
         values.put("total", order.getTotal());
         values.put("userID", order.getUserID());
         values.put("status", order.getStatus());
         values.put("shippingAddress", order.getShippingAddress());
-        long add = db.insert("Orders", null, values);
-        db.close();
-        return add != -1;
+
+        long result = db.insert("Orders", null, values);
+        return result != -1; // Trả về true nếu chèn thành công, ngược lại false
     }
 
-
-    public ArrayList<Order> getAll() {
-        ArrayList<Order> list = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String sql = "SELECT * FROM Orders";
-        Cursor cursor = db.rawQuery(sql, null);
-
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            String orderID = cursor.getString(0);
-            double total = cursor.getDouble(1);
-            int userID = cursor.getInt(2);
-            String status = cursor.getString(3);
-            String shippingAddress = cursor.getString(4);
-            Order order = new Order(orderID, total, userID, status, shippingAddress);
-            list.add(order);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        db.close();
-        return list;
-    }
-
-    public boolean updateStatus(String orderID, String status) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+    public boolean update(Order order) {
         ContentValues values = new ContentValues();
-        values.put("status", status);
-        int rows = db.update("Orders", values, "orderID = ?", new String[]{orderID});
-        db.close();
-        return rows > 0;
+        values.put("total", order.getTotal());
+        values.put("userID", order.getUserID());
+        values.put("status", order.getStatus());
+        values.put("shippingAddress", order.getShippingAddress());
+
+        int result = db.update("Orders", values, "orderID = ?", new String[]{order.getOrderID()});
+        return result > 0; // Trả về true nếu cập nhật thành công, ngược lại false
+    }
+
+    public boolean delete(String orderID) {
+        int result = db.delete("Orders", "orderID = ?", new String[]{orderID});
+        return result > 0; // Trả về true nếu xóa thành công, ngược lại false
+    }
+
+    // Lấy danh sách tất cả các đơn hàng từ cơ sở dữ liệu
+    public List<Order> getAllOrders() {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM Orders";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String orderID = cursor.getString(cursor.getColumnIndexOrThrow("orderID"));
+                double total = cursor.getDouble(cursor.getColumnIndexOrThrow("total"));
+                int userID = cursor.getInt(cursor.getColumnIndexOrThrow("userID"));
+                String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
+                String shippingAddress = cursor.getString(cursor.getColumnIndexOrThrow("shippingAddress"));
+
+                Order order = new Order(orderID, total, userID, status, shippingAddress);
+                // Thêm đơn hàng vào danh sách
+                orders.add(order);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return orders;
     }
 }

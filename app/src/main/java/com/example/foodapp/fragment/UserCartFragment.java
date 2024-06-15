@@ -107,7 +107,7 @@ public class UserCartFragment extends Fragment implements CartAdapter.OnItemSele
                     dialog.dismiss();
                     // Clear the cart or update UI as needed
                 } else {
-                    Toast.makeText(getContext(), "Order placed fail!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Order placement failed!", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception ex) {
                 Log.e(TAG, "Error inserting order: " + ex.getMessage());

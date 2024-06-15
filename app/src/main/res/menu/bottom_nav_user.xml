@@ -5,20 +5,20 @@
         android:id="@+id/home"
         android:icon="@drawable/home"
         android:title=""
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/food"
-        android:icon="@drawable/dish"
-        android:title=""
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/cart"
         android:icon="@drawable/cart"
         android:title=""
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/food"
+        android:icon="@drawable/dish"
+        android:title=""
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/user"
         android:title=""
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 </menu>

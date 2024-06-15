@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.foodapp.R;
 import com.example.foodapp.fragment.AdminBillFragment;
@@ -14,17 +17,23 @@ import com.example.foodapp.fragment.AdminMemberFragment;
 import com.example.foodapp.fragment.AdminNoticeFragment;
 import com.example.foodapp.fragment.AdminProductFragment;
 //import com.example.foodapp.fragment.AdminTypeFragment;
+import com.example.foodapp.log.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class AdminActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-
+    private Button btnLogout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminActivity.this, LoginActivity.class));
+            }
+        });
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
         // Set default fragment
