@@ -18,12 +18,4 @@
         android:layout_height="60dp"
         app:menu="@menu/bottom_nav_admin"
         android:layout_gravity="bottom"/>
-
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cornerRadius="8dp"
-        android:backgroundTint="#333"
-        android:text="Đăng xuất"/>
 </LinearLayout>

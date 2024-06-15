@@ -1,8 +1,8 @@
 package com.example.foodapp.model;
 
 public class Member {
-    private Integer Id,roleUser;
-    private String name, phone, avatar, orderID, passwordUser ;
+    private Integer Id, roleUser;
+    private String name, phone, avatar, orderID, passwordUser;
 
     public Member() {
     }

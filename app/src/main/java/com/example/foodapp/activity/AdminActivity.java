@@ -23,17 +23,11 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class AdminActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    private Button btnLogout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AdminActivity.this, LoginActivity.class));
-            }
-        });
+
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
         // Set default fragment
