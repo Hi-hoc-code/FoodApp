@@ -9,8 +9,6 @@ import com.example.foodapp.fragment.AllFragment;
 import com.example.foodapp.fragment.Food1Fragment;
 import com.example.foodapp.fragment.Food2Fragment;
 import com.example.foodapp.fragment.Food3Fragment;
-import com.example.foodapp.fragment.Food4Fragment;
-import com.example.foodapp.fragment.Food5Fragment;
 
 public class ViewPager2HomeUserAdapter extends FragmentStateAdapter {
     public ViewPager2HomeUserAdapter(@NonNull FragmentActivity fragmentActivity) {
@@ -29,12 +27,9 @@ public class ViewPager2HomeUserAdapter extends FragmentStateAdapter {
                 return new Food2Fragment();
             case 3:
                 return new Food3Fragment();
-            case 4:
-                return new Food4Fragment();
-            case 5:
-                return new Food5Fragment();
+
             default:
-                return new Food1Fragment();
+                return new AllFragment();
         }
     }
 

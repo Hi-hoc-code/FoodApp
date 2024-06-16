@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "APP_FOOD";
-    private static final int DATABASE_VERSION = 7; // Incremented version
+    private static final int DATABASE_VERSION = 1; // Incremented version
 
     private static final String TABLE_USER = "User";
     private static final String TABLE_CATEGORY = "Category";
@@ -75,19 +75,20 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CART);
 
         // Insert initial data
-        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Fruits', 'All kinds of fruits')");
-        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Vegetables', 'Various vegetables')");
-        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Meat', 'Different types of meat')");
-        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Seafood', 'Fresh seafood')");
-        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Dairy', 'Dairy products')");
-        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(name, description) VALUES('Beverages', 'Various drinks')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(id, name, description) VALUES(1,'Cơm', 'Những hạt gạo và cach chế biến ngon lành')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(id, name, description) VALUES(2,'Bún', 'Bao gồm những loại bún đến từ khắp nơi')");
+        db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(id, name, description) VALUES(3,'Thức ăn nhanh', 'Nhanh chóng, an toàn và tện lợi')");
 
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(1, 'Món ăn 1', 5000, 'mon_an', 'Đây là mô tả của món ăn', 1)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(2, 'Món ăn 2', 6000, 'anh3', 'Đây là mô tả của món ăn', 1)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(3, 'Món ăn 3', 7000, 'anh1', 'Đây là mô tả của món ăn', 1)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(4, 'Món ăn 4', 5000, 'mon_an', 'Đây là mô tả của món ăn', 2)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(5, 'Món ăn 5', 6000, 'anh2', 'Đây là mô tả của món ăn', 2)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(6, 'Món ăn 6', 7000, 'anh3', 'Đây là mô tả của món ăn', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(1, 'Bún chả cá', 5000, 'bun', 'Đây là mô tả của món ăn', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(2, 'Bún bò', 6000, 'bun1', 'Đây là mô tả của món ăn', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(3, 'Bún tái,nạm', 7000, 'bun2', 'Đây là mô tả của món ăn', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(4, 'Bún đậu mắm tôm', 5000, 'bundau', 'Đây là mô tả của món ăn', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(6, 'Cơm chiên Dương Châu', 6000, 'comchien', 'Đây là mô tả của món ăn', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(7, 'Cơm tấm', 7000, 'comtam', 'Đây là mô tả của món ăn', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(8, 'Cơm niêu', 7000, 'comnieu', 'Đây là mô tả của món ăn', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(9, 'Trái cây tươi', 7000, 'thucannhanh1', 'Đây là mô tả của món ăn', 3)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(10, 'Dâu tây', 7000, 'thucannhanh2', 'Đây là mô tả của món ăn', 3)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(11, 'Buger', 7000, 'mon_an', 'Đây là mô tả của món ăn', 3)");
 
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content, notificationId) VALUES('Giảm giá', 'Chương trình khuyến mãi mua 2 tặng 1', 1)");
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content) VALUES('Quà tặng cuộc sống', 'Quà tặng cuộc sống được ban cho bạn')");

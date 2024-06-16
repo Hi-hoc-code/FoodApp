@@ -10,14 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="32dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/avatar" />
+            android:layout_marginTop="80dp"
+            android:src="@drawable/avatar"
+            app:shapeAppearanceOverlay="@style/circle" />
+
 
         <TextView
             android:id="@+id/tvNameProfile"
@@ -35,79 +37,112 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="0708332716"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Cài đặt tài khoản"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/btnGoToInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thông tin cá nhân"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/next" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:id="@+id/btnGoToPassword">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="YOUR NAME"
-                android:textColor="#FE7F5E"
-                android:textSize="18sp"
+                android:layout_weight="1"
+                android:text="Thay đổi mật khẩu"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtNameProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="HO NGOC Y"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="YOUR EMAIL"
-                android:textColor="#FE7F5E"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtEmailProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ngocyho1612@gmail.com"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="YOUR NAME"
-                android:textColor="#FE7F5E"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtPhoneProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="0708332716"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/next" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnUpdateProfile"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:backgroundTint="#53c73c"
-            android:text="Update"
-            app:cornerRadius="8dp" />
+            android:text="Hỗ trợ khác"
+            android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btnLogoutUser"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:id="@+id/btnGoToDKBM">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Điều khoản và bảo mật"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/next" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:backgroundTint="#FF0000"
-            android:text="Logout"
-            app:cornerRadius="8dp" />
+            android:orientation="horizontal"
+            android:id="@+id/btnFAQ">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hỏi và trả lời"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/next" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="Đăng xuất"
+            android:textColor="#FF0000"
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

@@ -56,7 +56,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.edtQuantity.setText(String.valueOf(cart.getQuanity()));
         holder.checkboxCartItem.setOnCheckedChangeListener(null);
         holder.checkboxCartItem.setChecked(selectedItems.contains(index));
-
+        int resId = context.getResources().getIdentifier(cart.getImg(), "drawable", context.getPackageName());
+        holder.imgFoodCart.setImageResource(resId);
         holder.checkboxCartItem.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 selectedItems.add(index);

@@ -35,22 +35,16 @@ public class UserHomeFragment extends Fragment {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:
-                    tab.setText("All");
+                    tab.setText("Tất cả");
                     break;
                 case 1:
-                    tab.setText("Fruits");
+                    tab.setText("Cơm");
                     break;
                 case 2:
-                    tab.setText("Vegetables");
+                    tab.setText("Bún");
                     break;
                 case 3:
-                    tab.setText("Meat");
-                    break;
-                case 4:
-                    tab.setText("Seafood");
-                    break;
-                case 5:
-                    tab.setText("Dairy");
+                    tab.setText("Các loại thức ăn khác");
                     break;
             }
         }).attach();
