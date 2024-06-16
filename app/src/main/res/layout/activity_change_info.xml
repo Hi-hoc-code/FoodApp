@@ -22,6 +22,28 @@
         android:src="@drawable/avatar"
         app:shapeAppearanceOverlay="@style/circle" />
 
+    <TextView
+        android:id="@+id/tvNameInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Nguyễn Văn A"
+        android:letterSpacing="0.25"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvPhoneInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0708332716"
+        android:letterSpacing="0.25"
+        android:textSize="18sp"
+
+        android:layout_marginTop="5dp" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +56,7 @@
             android:background="@drawable/border_log"
             android:hint="Nhập tên" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/border_log"
-            android:hint="Số điện thoại" />
+            android:hint="Số điện thoại"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -53,8 +77,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
+        android:backgroundTint="#ed7411"
         android:text="Xác nhận"
-        app:cornerRadius="8dp"
-        android:backgroundTint="#ed7411"/>
+        app:cornerRadius="8dp" />
 
 </LinearLayout>
