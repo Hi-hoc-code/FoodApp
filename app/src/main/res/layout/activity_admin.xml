@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activity.AdminActivity"
     android:orientation="vertical">
-
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/btnLogoutAdmin"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/avatar"
+        app:shapeAppearance="@style/circle"/>
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"

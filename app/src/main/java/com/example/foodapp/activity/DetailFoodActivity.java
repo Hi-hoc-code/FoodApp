@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class DetailFoodActivity extends AppCompatActivity {
 
-    private TextView tvFoodName, tvFoodPrice;
+    private TextView tvFoodName, tvFoodPrice,tvDescriptionFoodDetail;
     private ImageView imgFood;
     private EditText etQuantity;
     private Button btnAddToCart;
@@ -41,6 +41,7 @@ public class DetailFoodActivity extends AppCompatActivity {
         // Initialize views
         tvFoodName = findViewById(R.id.tvFoodNameDetail);
         tvFoodPrice = findViewById(R.id.tvFoodPriceDetail);
+        tvDescriptionFoodDetail = findViewById(R.id.tvDescriptionFoodDetail);
         imgFood = findViewById(R.id.imgFoodDetail);
         etQuantity = findViewById(R.id.etQuantity);
         btnDecrease = findViewById(R.id.btnDecrease);
@@ -60,6 +61,7 @@ public class DetailFoodActivity extends AppCompatActivity {
             if (product != null) {
                 tvFoodName.setText(product.getName());
                 tvFoodPrice.setText(product.getPrice() + "$");
+                tvDescriptionFoodDetail.setText(product.getDes());
                 int resImg = getResources().getIdentifier(product.getImage(), "drawable", getPackageName());
                 imgFood.setImageResource(resImg);
             } else {

@@ -1,6 +1,7 @@
 package com.example.foodapp.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
@@ -74,8 +76,26 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
 
             // Set click listener to change order status
             itemView.setOnClickListener(v -> {
-                boolean newStatus = !order.getStatus().equalsIgnoreCase("confirmed");
-                listener.onOrderStatusChanged(order, newStatus);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Confirm Action");
+                builder.setMessage("Do you want to change the status of this order?");
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean newStatus = !order.getStatus().equalsIgnoreCase("confirmed");
+                        listener.onOrderStatusChanged(order, newStatus);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User cancelled the operation, do nothing
+                    }
+                });
+
+                // Create and show the AlertDialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
             });
         }
     }

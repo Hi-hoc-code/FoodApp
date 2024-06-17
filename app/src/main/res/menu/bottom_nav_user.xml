@@ -21,4 +21,9 @@
         android:icon="@drawable/user"
         android:title=""
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/notification"
+        android:title=""
+        app:showAsAction="ifRoom" />
 </menu>

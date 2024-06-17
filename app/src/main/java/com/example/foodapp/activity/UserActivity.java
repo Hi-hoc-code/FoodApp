@@ -15,6 +15,7 @@ import com.example.foodapp.R;
 import com.example.foodapp.fragment.UserCartFragment;
 import com.example.foodapp.fragment.UserFoodFragment;
 import com.example.foodapp.fragment.UserHomeFragment;
+import com.example.foodapp.fragment.UserNotificationFragment;
 import com.example.foodapp.fragment.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -49,7 +50,9 @@ public class UserActivity extends AppCompatActivity {
                     selectedFragment = new UserCartFragment();
                 } else if (itemId == R.id.food) {
                     selectedFragment = new UserFoodFragment();
-                } else if (itemId == R.id.profile) {
+                } else if (itemId == R.id.notification) {
+                    selectedFragment = new UserNotificationFragment();
+                }else if (itemId == R.id.profile) {
                     selectedFragment = new UserProfileFragment();
                 }
 
@@ -57,7 +60,6 @@ public class UserActivity extends AppCompatActivity {
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, selectedFragment).commit();
                 }
-
                 return true;
             }
         });
