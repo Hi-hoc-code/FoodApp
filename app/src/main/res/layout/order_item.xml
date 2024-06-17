@@ -4,47 +4,108 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:padding="8dp"
+    android:padding="16dp"
     app:cardBackgroundColor="#F5F5F5"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:layout_marginTop="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/tvOrderID"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="ID đơn hàng"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Trạng thái đơn hàng"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/ImgOrder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/logo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ImgOrder"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvOrderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyễn Văn A"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvOrderPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0912345678"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.000.000 VND"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đã xác nhận"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tvShippingAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Địa chỉ"
+            android:text="Số 123, Phố XYZ, Quận ABC"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tvTotal"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tổng tiền"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:layout_toRightOf="@+id/ImgOrder"
+            android:orientation="horizontal"
+            android:gravity="end">
+            <TextView
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="Sửa"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xóa"
+                android:gravity="end"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

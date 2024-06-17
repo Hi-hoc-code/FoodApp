@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
+import com.example.foodapp.dao.OrderDAO;
 import com.example.foodapp.model.Order;
 
 import java.util.List;
@@ -33,11 +35,40 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        Order order = orderList.get(position);
-        holder.tvOrderID.setText("Mã đơn hàng: "+order.getOrderID());
-        holder.tvTotal.setText("Tổng tiền: "+String.valueOf(order.getTotal()) +"VND");
+        Order order = orderList.get(holder.getAdapterPosition());
+//        holder.tvOrderID.setText("Mã đơn hàng: "+order.getOrderID());
+        holder.tvTotal.setText("Tổng tiền: "+order.getTotal() +"VND");
         holder.tvStatus.setText("Trạng thái đơn hàng: "+order.getStatus());
         holder.tvShippingAddress.setText("Địa chỉ giao hàng: "+order.getShippingAddress());
+        holder.tvName.setText("Tên: "+order.getName());
+        holder.tvPhone.setText("Số điện thoại: "+order.getPhoneNumber());
+        holder.tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteOrder(holder);
+            }
+        });
+        holder.tvEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editOrder(holder);
+            }
+        });
+    }
+
+    private void deleteOrder(OrderViewHolder holder) {
+        OrderDAO orderDAO = new OrderDAO(context);
+        Order order = orderList.get(holder.getAdapterPosition());
+        if(orderDAO.delete(order.getOrderID())){
+            orderList.remove(holder.getAdapterPosition());
+            notifyDataSetChanged();
+        }else {
+            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void editOrder(OrderViewHolder holder) {
+
     }
 
     @Override
@@ -47,14 +78,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvOrderID, tvTotal, tvStatus, tvShippingAddress;
+        TextView tvOrderID, tvTotal, tvStatus, tvShippingAddress,tvName,tvPhone, tvDelete, tvEdit;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvOrderID = itemView.findViewById(R.id.tvOrderID);
+//            tvOrderID = itemView.findViewById(R.id.tvOrderID);
             tvTotal = itemView.findViewById(R.id.tvTotal);
             tvStatus = itemView.findViewById(R.id.tvStatus);
             tvShippingAddress = itemView.findViewById(R.id.tvShippingAddress);
+            tvName = itemView.findViewById(R.id.tvOrderName);
+            tvPhone = itemView.findViewById(R.id.tvOrderPhone);
+            tvDelete = itemView.findViewById(R.id.btnDelete);
+            tvEdit=itemView.findViewById(R.id.btnEdit);
         }
     }
 }

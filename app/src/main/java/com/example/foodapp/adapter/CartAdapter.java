@@ -52,7 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         CartDAO cartDAO = new CartDAO(context);
 
         holder.tvNameFoodCart.setText(cart.getNameFood());
-        holder.tvPriceFoodCart.setText(cart.getPrice() + "$");
+        holder.tvPriceFoodCart.setText(cart.getPrice() + "VND");
         holder.edtQuantity.setText(String.valueOf(cart.getQuanity()));
         holder.checkboxCartItem.setOnCheckedChangeListener(null);
         holder.checkboxCartItem.setChecked(selectedItems.contains(index));
@@ -129,7 +129,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 cartList.clear();
                 cartList.addAll(cartDAO.getAll());
                 notifyDataSetChanged();
-                Toast.makeText(context, "Item removed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                 onItemSelectedListener.onItemSelected(getTotalPrice());
             } catch (Exception ex) {
                 Log.d("CartAdapter", "DELETE CART: " + ex);

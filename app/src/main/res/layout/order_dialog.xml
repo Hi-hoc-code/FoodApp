@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="Thông tin nhận hàng"/>
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên nhận hàng"
+        android:inputType="textPostalAddress"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/edtPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số điện thoại nhận hàng"
+        android:inputType="textPostalAddress"
+        android:layout_marginTop="10dp"/>
     <EditText
         android:id="@+id/edtShippingAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Shipping Address"
-        android:inputType="textPostalAddress" />
+        android:hint="Địa chỉ giao hàng"
+        android:inputType="textPostalAddress"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/btnConfirmOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm Order" />
+        android:text="Xác nhận"
+        app:cornerRadius="8dp"
+        android:backgroundTint="#0C852A"
+        android:layout_marginTop="35dp"/>
 </LinearLayout>

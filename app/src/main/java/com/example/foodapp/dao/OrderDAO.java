@@ -28,18 +28,21 @@ public class OrderDAO {
         values.put("userID", order.getUserID());
         values.put("status", order.getStatus());
         values.put("shippingAddress", order.getShippingAddress());
-
+        values.put("phone",order.getPhoneNumber());
+        values.put("name",order.getName());
         long result = db.insert("Orders", null, values);
-        return result != -1; // Trả về true nếu chèn thành công, ngược lại false
+        return result != -1;
     }
 
     public boolean update(Order order) {
         ContentValues values = new ContentValues();
+        values.put("orderID", order.getOrderID());
         values.put("total", order.getTotal());
         values.put("userID", order.getUserID());
         values.put("status", order.getStatus());
         values.put("shippingAddress", order.getShippingAddress());
-
+        values.put("phone",order.getPhoneNumber());
+        values.put("name",order.getName());
         int result = db.update("Orders", values, "orderID = ?", new String[]{order.getOrderID()});
         return result > 0; // Trả về true nếu cập nhật thành công, ngược lại false
     }
@@ -58,12 +61,13 @@ public class OrderDAO {
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 String orderID = cursor.getString(cursor.getColumnIndexOrThrow("orderID"));
-                double total = cursor.getDouble(cursor.getColumnIndexOrThrow("total"));
+                int total = cursor.getInt(cursor.getColumnIndexOrThrow("total"));
                 int userID = cursor.getInt(cursor.getColumnIndexOrThrow("userID"));
                 String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
                 String shippingAddress = cursor.getString(cursor.getColumnIndexOrThrow("shippingAddress"));
-
-                Order order = new Order(orderID, total, userID, status, shippingAddress);
+                String name =cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                String phone =cursor.getString(cursor.getColumnIndexOrThrow("phone"));
+                Order order = new Order(orderID, status, userID, total, name,phone, shippingAddress);
                 // Thêm đơn hàng vào danh sách
                 orders.add(order);
             } while (cursor.moveToNext());

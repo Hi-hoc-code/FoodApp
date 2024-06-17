@@ -66,24 +66,25 @@ public class UserCartFragment extends Fragment implements CartAdapter.OnItemSele
     }
 
     private void updateCheckoutButton(double totalPrice) {
-        String buttonText = "Thanh toán với: " + totalPrice + " VND";
+        String buttonText = "Tạm tính: " + totalPrice + " VND";
         btnCheckout.setText(buttonText);
     }
 
-    private double getTotalPrice() {
-        double totalPrice = 0;
+    private int getTotalPrice() {
+        int totalPrice = 0;
         for (Cart cart : listCart) {
             totalPrice += cart.getPrice() * cart.getQuanity();
         }
         return totalPrice;
     }
 
-    private void showOrderDialog(double totalPrice) {
+    private void showOrderDialog(int totalPrice) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.order_dialog, null);
         builder.setView(dialogView);
-
+        EditText edtPhone = dialogView.findViewById(R.id.edtPhone);
+        EditText edtName = dialogView.findViewById(R.id.edtName);
         EditText edtShippingAddress = dialogView.findViewById(R.id.edtShippingAddress);
         Button btnConfirmOrder = dialogView.findViewById(R.id.btnConfirmOrder);
 
@@ -91,28 +92,30 @@ public class UserCartFragment extends Fragment implements CartAdapter.OnItemSele
 
         btnConfirmOrder.setOnClickListener(v -> {
             String shippingAddress = edtShippingAddress.getText().toString();
+            String name = edtName.getText().toString();
+            String phone = edtPhone.getText().toString();
             if (shippingAddress.isEmpty()) {
-                Toast.makeText(getContext(), "Please enter a shipping address", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Vui lòng nhập địa chỉ giao hàng", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             String orderID = UUID.randomUUID().toString();
-            int userID = 7; // This should be the actual logged-in user's ID
+            int userID = 7;
             String status = "pending";
-            Order order = new Order(orderID, totalPrice, userID, status, shippingAddress);
+            Order order = new Order(orderID,status,userID,  totalPrice,name , phone, shippingAddress );
 
             try {
                 if (orderDAO.insert(order)) {
-                    Toast.makeText(getContext(), "Order placed successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     // Clear the cart or update UI as needed
                 } else {
-                    Toast.makeText(getContext(), "Order placement failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Đặt hàng thất bại!", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception ex) {
                 Log.e(TAG, "Error inserting order: " + ex.getMessage());
                 ex.printStackTrace();
-                Toast.makeText(getContext(), "Failed to place order", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Đặt hàng thất bại", Toast.LENGTH_SHORT).show();
             }
         });
 

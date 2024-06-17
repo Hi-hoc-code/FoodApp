@@ -69,7 +69,7 @@ public class DetailFoodActivity extends AppCompatActivity {
                 finish();
             }
         } else {
-            Toast.makeText(this, "Invalid product ID", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Invalid product ID", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -97,14 +97,14 @@ public class DetailFoodActivity extends AppCompatActivity {
             String des = product.getDes();
             Integer price = product.getPrice();
             if (cartDAO.isItemInCart(nameFood)) {
-                Toast.makeText(DetailFoodActivity.this, "Item already in cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailFoodActivity.this, "Món ăn đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
             } else {
                 if (quantity > 0 && quantity <= 50 ) {
                     Cart cart = new Cart(nameFood, img, des, price, quantity);
                     cartDAO.insert(cart);
-                    Toast.makeText(DetailFoodActivity.this, "Item added to cart", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailFoodActivity.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(DetailFoodActivity.this, "Add failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailFoodActivity.this, "Thêm giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         });

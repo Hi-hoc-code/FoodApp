@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "APP_FOOD";
-    private static final int DATABASE_VERSION = 1; // Incremented version
+    private static final int DATABASE_VERSION = 3; // Incremented version
 
     private static final String TABLE_USER = "User";
     private static final String TABLE_CATEGORY = "Category";
@@ -44,8 +44,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "orderID TEXT PRIMARY KEY," +
             "total REAL," +
             "userID INTEGER," +
-            "status TEXT," + // Added new column
-            "shippingAddress TEXT," + // Added new column
+            "status TEXT," +
+            "shippingAddress TEXT," +
+            "phone TEXT," +
+            "name TEXT," + // Added new column
             "FOREIGN KEY (userID) REFERENCES " + TABLE_USER + "(id))";
 
     private static final String CREATE_TABLE_NOTIFICATION = "CREATE TABLE " + TABLE_NOTIFICATION + " (" +
@@ -79,24 +81,24 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(id, name, description) VALUES(2,'Bún', 'Bao gồm những loại bún đến từ khắp nơi')");
         db.execSQL("INSERT INTO " + TABLE_CATEGORY + "(id, name, description) VALUES(3,'Thức ăn nhanh', 'Nhanh chóng, an toàn và tện lợi')");
 
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(1, 'Bún chả cá', 5000, 'bun', 'Đây là mô tả của món ăn', 1)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(2, 'Bún bò', 6000, 'bun1', 'Đây là mô tả của món ăn', 1)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(3, 'Bún tái,nạm', 7000, 'bun2', 'Đây là mô tả của món ăn', 1)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(4, 'Bún đậu mắm tôm', 5000, 'bundau', 'Đây là mô tả của món ăn', 1)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(6, 'Cơm chiên Dương Châu', 6000, 'comchien', 'Đây là mô tả của món ăn', 2)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(7, 'Cơm tấm', 7000, 'comtam', 'Đây là mô tả của món ăn', 2)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(8, 'Cơm niêu', 7000, 'comnieu', 'Đây là mô tả của món ăn', 2)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(9, 'Trái cây tươi', 7000, 'thucannhanh1', 'Đây là mô tả của món ăn', 3)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(10, 'Dâu tây', 7000, 'thucannhanh2', 'Đây là mô tả của món ăn', 3)");
-        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(11, 'Buger', 7000, 'mon_an', 'Đây là mô tả của món ăn', 3)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(1, 'Bún chả cá', 25000, 'bun', 'Bún chả cá là món ăn đặc sản miền Trung, với chả cá dai ngon hòa quyện cùng nước dùng ngọt thanh từ xương cá và rau củ', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(2, 'Bún bò', 25000, 'bun1', 'Bún bò Huế là món ăn nổi tiếng của Huế, với nước dùng đậm đà từ xương bò, kết hợp cùng thịt bò mềm, giò heo, và hương thơm từ sả, ớt.', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(3, 'Bún tái,nạm', 30000, 'bun2', 'Bún tái, nạm là món bún với nước dùng trong, thơm ngon từ xương bò, kèm theo thịt bò tái và nạm mềm, ăn kèm rau sống tươi mát', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(4, 'Bún đậu mắm tôm', 70000, 'bundau', 'Bún đậu mắm tôm là món ăn dân dã với bún tươi, đậu hũ chiên giòn, chả cốm, thịt luộc và mắm tôm đặc trưng pha chanh, đường, ớt', 1)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(6, 'Cơm chiên Dương Châu', 45000, 'comchien', 'Cơm chiên Dương Châu là món cơm chiên đặc trưng của người Hoa, với hạt cơm tơi xốp, màu sắc đẹp mắt từ trứng, đậu Hà Lan, cà rốt, xúc xích và tôm', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(7, 'Cơm tấm', 35000, 'comtam', 'Cơm tấm là món ăn đặc trưng của miền Nam Việt Nam, với cơm từ gạo tấm, sườn nướng, bì, chả trứng, ăn kèm dưa leo, cà chua, và nước mắm chua ngọt', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(8, 'Cơm niêu', 100000, 'comnieu', 'Đây là mô tả của món ăn', 2)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(9, 'Trái cây tươi', 25000, 'thucannhanh1', 'Trái cây tươi là món ăn nhẹ, bổ dưỡng với các loại trái cây tươi ngon như xoài, dứa, dưa hấu, nho, giúp cung cấp vitamin và năng lượng cho cơ thể', 3)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(10, 'Pizza', 60000, 'thucannhanh2', 'Pizza là món ăn Ý nổi tiếng, với đế bánh giòn tan, phủ phô mai, sốt cà chua và các loại nhân phong phú như thịt bò, gà, hải sản, rau củ', 3)");
+        db.execSQL("INSERT INTO " + TABLE_PRODUCT + "(id, name, price, image, description, categoryId) VALUES(11, 'Buger', 60000, 'mon_an', 'Burger là món ăn nhanh phổ biến, với bánh mì kẹp thịt bò nướng, phô mai, rau sống như xà lách, cà chua, dưa chuột, và sốt đặc trưng.', 3)");
 
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content, notificationId) VALUES('Giảm giá', 'Chương trình khuyến mãi mua 2 tặng 1', 1)");
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content) VALUES('Quà tặng cuộc sống', 'Quà tặng cuộc sống được ban cho bạn')");
         db.execSQL("INSERT INTO " + TABLE_NOTIFICATION + "(title, content) VALUES('Thông báo', 'Bạn đã bị thua 5 tỉ!')");
 
-        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Pizza', 'anh1', 'Delicious pizza with cheese', 10, 2)");
-        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Burger', 'anh2', 'Tasty burger with beef patty', 8, 1)");
-        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Pasta', 'anh3', 'Italian pasta with tomato sauce', 12, 3)");
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Bún chả cá', 'bun', 'Bún chả cá là món ăn đặc sản miền Trung, với chả cá dai ngon hòa quyện cùng nước dùng ngọt thanh từ xương cá và rau củ', 25000, 2)");
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Trái cây tươi', 'thucannhanh1', 'Trái cây tươi là món ăn nhẹ, bổ dưỡng với các loại trái cây tươi ngon như xoài, dứa, dưa hấu, nho, giúp cung cấp vitamin và năng lượng cho cơ thể.', 25000, 1)");
+        db.execSQL("INSERT INTO " + TABLE_CART + "(nameFood, img, des, price, quanity) VALUES('Cơm tấm', 'comtam', 'Pizza là món ăn Ý nổi tiếng, với đế bánh giòn tan, phủ phô mai, sốt cà chua và các loại nhân phong phú như thịt bò, gà, hải sản, rau củ', 60000, 3)");
 
         db.execSQL("INSERT INTO " + TABLE_USER + "(name, passwordUser, roleUser) VALUES('Admin', 'Admin123@', 0)");
         db.execSQL("INSERT INTO " + TABLE_USER + "(name, phone, avatar, orderID, passwordUser, roleUser) VALUES('John Doe', '123-456-7890', 'avatar1', 'order_001', 'password123', 1)");
