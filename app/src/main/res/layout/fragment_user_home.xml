@@ -13,8 +13,7 @@
         app:tabMode="scrollable"
         app:tabSelectedTextColor="#FE7F5E"
         app:tabTextColor="#333"
-        android:layout_gravity="center"
-        app:tabGravity="center"/>
+        android:layout_gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"

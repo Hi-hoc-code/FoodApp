@@ -79,6 +79,11 @@ public class UserCartFragment extends Fragment implements CartAdapter.OnItemSele
     }
 
     private void showOrderDialog(int totalPrice) {
+        if (totalPrice == 0) {
+            Toast.makeText(getContext(), "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.order_dialog, null);
@@ -91,24 +96,38 @@ public class UserCartFragment extends Fragment implements CartAdapter.OnItemSele
         AlertDialog dialog = builder.create();
 
         btnConfirmOrder.setOnClickListener(v -> {
-            String shippingAddress = edtShippingAddress.getText().toString();
-            String name = edtName.getText().toString();
-            String phone = edtPhone.getText().toString();
+            String shippingAddress = edtShippingAddress.getText().toString().trim();
+            String name = edtName.getText().toString().trim();
+            String phone = edtPhone.getText().toString().trim();
+
+            // Kiểm tra lỗi từng trường
+            if (name.isEmpty()) {
+                edtName.setError("Vui lòng nhập tên");
+                edtName.requestFocus();
+                return;
+            }
+            if (phone.isEmpty()) {
+                edtPhone.setError("Vui lòng nhập số điện thoại");
+                edtPhone.requestFocus();
+                return;
+            }
             if (shippingAddress.isEmpty()) {
-                Toast.makeText(getContext(), "Vui lòng nhập địa chỉ giao hàng", Toast.LENGTH_SHORT).show();
+                edtShippingAddress.setError("Vui lòng nhập địa chỉ giao hàng");
+                edtShippingAddress.requestFocus();
                 return;
             }
 
+            // Tạo đơn hàng mới với thông tin nhập vào
             String orderID = UUID.randomUUID().toString();
-            int userID = 7;
+            int userID = 7; // Thay đổi userID theo logic của ứng dụng của bạn
             String status = "pending";
-            Order order = new Order(orderID,status,userID,  totalPrice,name , phone, shippingAddress );
+            Order order = new Order(orderID, status, userID, totalPrice, name, phone, shippingAddress);
 
             try {
                 if (orderDAO.insert(order)) {
                     Toast.makeText(getContext(), "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                    // Clear the cart or update UI as needed
+                    // Xóa giỏ hàng hoặc cập nhật giao diện người dùng tại đây
                 } else {
                     Toast.makeText(getContext(), "Đặt hàng thất bại!", Toast.LENGTH_SHORT).show();
                 }
@@ -121,4 +140,5 @@ public class UserCartFragment extends Fragment implements CartAdapter.OnItemSele
 
         dialog.show();
     }
+
 }

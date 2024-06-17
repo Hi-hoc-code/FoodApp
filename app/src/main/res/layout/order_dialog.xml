@@ -5,27 +5,31 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="Thông tin nhận hàng"
         android:textSize="22sp"
-        android:textStyle="bold"
-        android:text="Thông tin nhận hàng"/>
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tên nhận hàng"
-        android:inputType="textPostalAddress"
+        android:inputType="text"
         android:layout_marginTop="20dp"/>
+
     <EditText
         android:id="@+id/edtPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Số điện thoại nhận hàng"
-        android:inputType="textPostalAddress"
+        android:inputType="number"
         android:layout_marginTop="10dp"/>
+
     <EditText
         android:id="@+id/edtShippingAddress"
         android:layout_width="match_parent"
@@ -39,7 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Xác nhận"
-        app:cornerRadius="8dp"
         android:backgroundTint="#0C852A"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="35dp"
+        app:cornerRadius="8dp"/>
+
 </LinearLayout>

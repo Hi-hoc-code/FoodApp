@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="12dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:backgroundTint="#ffffff">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Title Section -->
+        <TextView
+            android:id="@+id/labelTitleU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title      :  "
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvTitleU"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Đây là title"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/labelTitleU"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Content Section -->
+        <TextView
+            android:id="@+id/labelContentU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Content:  "
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleU"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvContentU"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Đây là content với nội dung dài hơn, và sẽ tự động xuống dòng khi cần thiết để vừa vặn trong không gian của card view này."
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/labelContentU"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleU"
+            android:layout_marginTop="12dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

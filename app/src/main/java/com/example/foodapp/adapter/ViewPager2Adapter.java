@@ -19,8 +19,6 @@ public class ViewPager2Adapter extends FragmentStateAdapter {
         switch (position) {
             case 0:
                 return new ProductEditFragment();
-            case 1:
-                return new TypeEditFragment();
             default:
                 return new ProductEditFragment();
         }
